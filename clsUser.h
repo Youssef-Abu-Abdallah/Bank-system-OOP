@@ -6,6 +6,7 @@
 # include <vector>
 # include <fstream>
 # include "clsDate.h"
+# include "clsUtil.h"
 
 using namespace std;
 
@@ -33,11 +34,11 @@ private :
         vUserData = clsString::SplitString(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+            vUserData[3], vUserData[4], clsUtil::DecryptText(vUserData[5],2), stoi(vUserData[6]));
 
     }
 
-    static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
+    static string _ConvertUserObjectToLine(clsUser User, string Seperator = "#//#")
     {
 
         string UserRecord = "";
@@ -46,7 +47,8 @@ private :
         UserRecord += User.Email + Seperator;
         UserRecord += User.Phone + Seperator;
         UserRecord += User.UserName + Seperator;
-        UserRecord += User.Password + Seperator;
+        // here we encrypt the password 
+        UserRecord += clsUtil::EncryptText(User.Password,2) + Seperator;
         UserRecord += to_string(User._Permission);
 
         return UserRecord;
@@ -99,7 +101,7 @@ private :
                 if (U.MarkedForDeleted() == false)
                 {
                     //we only write records that are not marked for delete.  
-                    DataLine = _ConverUserObjectToLine(U);
+                    DataLine = _ConvertUserObjectToLine(U);
                     MyFile << DataLine << endl;
 
                 }
@@ -152,7 +154,7 @@ private :
 
     void _AddNew()
     {
-        _AddDataLineToFile(_ConverUserObjectToLine(*this));
+        _AddDataLineToFile(_ConvertUserObjectToLine(*this));
     }
 
 
@@ -163,7 +165,7 @@ private :
          string LoginRecord = "";
          LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
          LoginRecord += UserName + Seperator;
-         LoginRecord += Password + Seperator;
+         LoginRecord += clsUtil::EncryptText(Password) + Seperator;
          LoginRecord += to_string(Permission);
          return LoginRecord;
      }
@@ -177,7 +179,7 @@ private :
 
          LoginRegisterRecord.DateTime = vLoginRegisterLine[0];
          LoginRegisterRecord.UserName = vLoginRegisterLine[1];
-         LoginRegisterRecord.Password = vLoginRegisterLine[2];
+         LoginRegisterRecord.Password = clsUtil::DecryptText(vLoginRegisterLine[2],2);
          LoginRegisterRecord.Permissions = stoi(vLoginRegisterLine[3]);
 
          return LoginRegisterRecord;

@@ -10,14 +10,24 @@ using namespace std;
 class clsInputValidate
 {
 public:
-	static bool IsNumberBetween(int Number, int From, int To)
+
+	template <typename T>
+	static T IsNumberBetween(T Number, T From, T To)
 	{
 		return (Number >= From && Number <= To);
 	}
 
-	static bool IsNumberBetween(double Number, double From, double To)
+	template <typename T>
+	static T ReadNumber(string ErrorMessage = "Invalid Number , Please enter another Number : ")
 	{
-		return (Number >= From && Number <= To);
+		T Number;
+		while (!(cin >> Number))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErreorMessage << endl;
+		}
+		return Number
 	}
 
 	static bool IsDateBetween(clsDate Date, clsDate DateFrom, clsDate DateTo)
@@ -201,15 +211,30 @@ public:
 		return stoi(Number);
 	}
 
+	
 	static short ReadShortNumberBetween(short From, short To, string ErrorMessage = "Number is out of range!, Please enter another number :")
 	{
 		short Number;
 
 		Number = clsInputValidate::ReadShortNumber();
-		while (!IsNumberBetween(Number, From, To))
+		while (!IsNumberBetween<short>(Number, From, To))
 		{
 			cout << ErrorMessage;
 			Number = clsInputValidate::ReadShortNumber();
+		}
+		return Number;
+	}
+
+	template <typename T>
+	static T ReadNumberBetween(T From, T To, string ErrorMessage = "Number is out of range!, Please enter another number :")
+	{
+		T Number;
+
+		Number = clsInputValidate::ReadNumber<T>();
+		while (!IsNumberBetween<T>(Number, From, To))
+		{
+			cout << ErrorMessage;
+			Number = clsInputValidate::ReadNumber<T>();
 		}
 		return Number;
 	}
@@ -219,7 +244,7 @@ public:
 		int Number;
 
 		Number= clsInputValidate::ReadIntNumber();
-		while (!IsNumberBetween(Number , From , To))
+		while (!IsNumberBetween<int>(Number , From , To))
 		{
 			cout << ErrorMessage;
 			Number= clsInputValidate::ReadIntNumber();
@@ -319,7 +344,7 @@ public:
 	{
 		double Number = ReadDoubleNumber();
 
-		while (!IsNumberBetween(Number, From, To)) {
+		while (!IsNumberBetween<double>(Number, From, To)) {
 			cout << ErrorMessage;
 			Number = ReadDoubleNumber();
 		}

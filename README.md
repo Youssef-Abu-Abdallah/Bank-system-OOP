@@ -74,7 +74,7 @@ Fully modular design with **layered architecture**, applying principles of:
 ### 📁 Project Structure
 
 
-### Object-Oriented Architecture
+### Object-Oriented Architecture for better understanding and organiztion logic purpose
 
 📦 Bank system project/
 ├── 📂 Source Files

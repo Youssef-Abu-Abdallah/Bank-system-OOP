@@ -217,6 +217,7 @@ Fully modular design with **layered architecture**, applying principles of:
 git clone https://github.com/Youssef-Abu-Abdallah/Bank-system-OOP.git
 cd Bank-system-OOP
 ```
+run the .cpp file with your IDE 
 To login please check premade users in `Users.txt` and pick any one and login with his access status **0 means has no access , -1 means has full access (admin)**
 
 ## Contact Info :

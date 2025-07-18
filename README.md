@@ -220,5 +220,5 @@ cd Bank-system-OOP
 To login please check premade users in `Users.txt` and pick any one and login with his acces status **0 means has no access , -1 means has full access (admin)**
 
 ## Contact Info :
-- LinkedIn [Youssef Abu-Abdallah](linkedin.com/in/youssef-abu-abdallah-467b202a6)
+- LinkedIn [Youssef Abu-Abdallah](https://www.linkedin.com/in/youssef-abu-abdallah-467b202a6/)
 - Email youssef.abu.abdallah1@gmail.com

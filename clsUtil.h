@@ -251,7 +251,7 @@ public:
         if (Number >= 1 && Number <= 19)
         {
             string arr[] = { "","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten",
-            "Eleven" , "Twelve" , "Therteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen" };
+            "Eleven" , "Twelve" , "Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen" };
             return arr[Number];
         }
 
@@ -263,12 +263,12 @@ public:
 
         if (Number >= 100 && Number <= 199)
         {
-            return "One hundred " + NumberToText(Number % 100);
+            return "One Hundred " + NumberToText(Number % 100);
         }
 
         if (Number >= 200 && Number <= 999)
         {
-            return NumberToText(Number / 100) + " hundreds " + NumberToText(Number % 100);
+            return NumberToText(Number / 100) + " Hundreds " + NumberToText(Number % 100);
         }
 
         if (Number >= 1000 && Number <= 1999)
